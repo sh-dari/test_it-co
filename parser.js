@@ -6,16 +6,16 @@
  * @return {Object} объект с распарсенными данными.
  */
 const parseUrl = (str) => {
-    const mass = str.split(/[:\/#?]+/g);
+    const parse = str.match(/^((https?\:)\/\/(([^:\/?#]*)(?:\:([0-9]+))?))([\/]{0,1}[^?#]*)(\?[^#]*|)(#.*|)$/);
     return {
-        href: str,
-        hash: `#${mass[6]}`,
-        port: mass[2],
-        host: `${mass[1]}:${mass[2]}`,
-        protocol: `${mass[0]}:`,
-        hostname: mass[1],
-        pathname: `\/${mass[3]}\/${mass[4]}`,
-        origin: `${mass[0]}://${mass[1]}:${mass[2]}`,
+        href: parse[0],
+        hash: parse[8],
+        port: parse[5],
+        host: parse[3],
+        protocol: parse[2],
+        hostname: parse[4],
+        pathname: parse[6],
+        origin: parse[1],
     }
 }
 
